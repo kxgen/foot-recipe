@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+    /* ──────────────────────────────
+       Brand Identity
+    ────────────────────────────── */
+    --color-brand-wine: #b84a56;
+    --color-brand-lime: #d9f065;
+
+    /* Supporting */
+    --color-brand-rose: #d8707d;
+    --color-brand-cream: #fdfcf7;
+
+    /* ──────────────────────────────
+       Actions
+    ────────────────────────────── */
+    --color-primary: #b84a56;
+    --color-primary-subtle: #d8707d;
+    --color-cta: #b84a56;
+    --color-pure: #ffffff;
+
+    /* Highlights */
+    --color-accent: #d9f065;
+    --color-accent-subtle: #f3f9cf;
+    --color-star: #fbbf24;
+
+    /* ──────────────────────────────
+       Light Surfaces
+    ────────────────────────────── */
+    --color-canvas: #f6f4ec;
+    --color-layer: #fdfcf7;
+    --color-raised: #ffffff;
+    --color-surface-muted: #e8e5da;
+    --color-sage: #cbd5c5;
+
+    /* Text */
+    --color-heading: #2f2730;
+    --color-heading-muted: #6b5f6d;
+    --color-body: #463d46;
+    --color-subtle: #817881;
+    --color-inverted: #ffffff;
+
+    /* Feedback */
+    --color-danger: #c0392b;
+    --color-danger-bg: #fff1f1;
+
+    --color-success: #2d6a4f;
+    --color-success-bg: #eef9f2;
+
+    --color-warning: #d97706;
+    --color-warning-bg: #fff8e6;
+
+    --color-info: #2563eb;
+    --color-info-bg: #eef5ff;
+
+    /* Typography */
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "DM Sans", system-ui, sans-serif;
+    --font-brand: "Brand", system-ui;
+
+    /* Misc */
+    --radius-card: 1rem;
+    --shadow-soft: 0 8px 24px -8px rgb(0 0 0 / 0.08);
+}
+
+:root {
+    --page-max: 72rem;
+}
+
+@font-face {
+    font-family: "Brand";
+    src: url("/fonts/brand.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    color-scheme: light;
+    @apply antialiased scroll-smooth;
+}
+
+body {
+    @apply min-h-screen flex flex-col;
+    background: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    @apply tracking-tight;
+}
+
+a {
+    @apply transition-colors duration-200;
+}
+
+.page-container {
+    @apply mx-auto w-full max-w-[var(--page-max)] px-4 sm:px-6 lg:px-8;
+}
+
+.card-surface {
+    border-radius: var(--radius-card);
+    background: var(--color-layer);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgb(217 240 101 / 0.12);
+}
+
+.btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-bold transition shadow-sm;
+    background: var(--color-cta);
+    color: var(--color-inverted);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.08);
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold transition;
+    background: var(--color-canvas);
+    color: var(--color-body);
+    border: 1px solid rgb(217 240 101 / 0.25);
+}
+
+.btn-secondary:hover {
+    background: var(--color-layer);
+    border-color: var(--color-accent);
+}
+
+.input-field {
+    @apply w-full rounded-xl px-4 py-2.5 transition;
+    background: var(--color-canvas);
+    color: var(--color-body);
+    border: 1px solid rgb(217 240 101 / 0.18);
+}
+
+.input-field::placeholder {
+    color: rgb(129 120 129 / 0.6);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    box-shadow: 0 0 0 3px rgb(217 240 101 / 0.25);
+}
+
+.badge {
+    @apply inline-flex items-center rounded-lg px-2 py-1 text-xs font-semibold;
+    background: rgb(217 240 101 / 0.16);
+    color: var(--color-primary);
+}
+
+.nav-link {
+    color: var(--color-body);
+}
+
+.nav-link:hover {
+    color: var(--color-cta);
+}
+
+.nav-link-active {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.error-message {
+    @apply rounded-xl px-4 py-3 text-sm font-medium;
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+    border-left: 4px solid #ffb3bb;
+}
+
+.success-message {
+    @apply rounded-xl px-4 py-3 text-sm font-medium;
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    border-left: 4px solid #b7ffd0;
+}

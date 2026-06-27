@@ -1,0 +1,87 @@
+table:
+  name: recipe_ingredients
+  schema: public
+object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+        - recipe_id
+        - name
+        - quantity
+        - unit
+        - notes
+        - sort_order
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+        - recipe_id
+        - name
+        - quantity
+        - unit
+        - notes
+        - sort_order
+      filter:
+        recipe:
+          price:
+            _eq: 0
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - id
+        - recipe_id
+        - name
+        - quantity
+        - unit
+        - notes
+        - sort_order
+      filter:
+        _or:
+          - recipe:
+              price:
+                _eq: 0
+          - recipe:
+              user_id:
+                _eq: X-Hasura-User-Id
+          - recipe:
+              recipe_purchases:
+                _and:
+                  - user_id:
+                      _eq: X-Hasura-User-Id
+                  - status:
+                      _eq: completed
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - quantity
+        - unit
+        - notes
+        - sort_order
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        recipe:
+          user_id:
+            _eq: X-Hasura-User-Id
+    comment: ""

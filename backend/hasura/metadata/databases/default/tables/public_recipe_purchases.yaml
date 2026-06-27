@@ -1,0 +1,53 @@
+table:
+  name: recipe_purchases
+  schema: public
+object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-user-id
+      columns:
+        - recipe_id
+        - amount_paid
+        - payment_provider
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - user_id
+        - recipe_id
+        - payment_provider
+        - provider_transaction_id
+        - amount_paid
+        - status
+        - purchased_at
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    comment: ""
+event_triggers:
+  - name: send_email_event_trigger
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: http://host.docker.internal:8000/payments/send-email
+    headers:
+      - name: Content-Type
+        value: application/json

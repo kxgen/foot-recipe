@@ -1,0 +1,49 @@
+actions:
+  - name: initiatePurchase
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/payments/chapa/initialize
+    permissions:
+      - role: user
+  - name: loginUser
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/auth/login
+    permissions:
+      - role: anonymous
+    comment: Handles the login and returns back JWT Token
+  - name: registerUser
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/auth/register
+    permissions:
+      - role: anonymous
+    comment: Handles user registration and returns JWT Token
+  - name: uploadAvatar
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/users/upload-avatar
+    permissions:
+      - role: user
+  - name: uploadRecipeImage
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/recipes/upload-image
+    permissions:
+      - role: user
+  - name: updatePassword
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8000/users/update-password
+    permissions:
+      - role: user
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: LoginResponse
+    - name: AvatarUploadOutput
+    - name: RecipeImageUploadOutput
+    - name: InitiatePurchaseOutput
+    - name: UpdatePasswordOutput
+  scalars: []

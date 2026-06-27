@@ -1,0 +1,11 @@
+CREATE TABLE users (
+    id         INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username   VARCHAR(50)  NOT NULL UNIQUE,
+    slug       VARCHAR(100) NOT NULL UNIQUE,
+    email      VARCHAR(255) NOT NULL UNIQUE,
+    password   TEXT         NOT NULL,
+    avatar_url TEXT,
+    bio        TEXT,
+    created_at TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);

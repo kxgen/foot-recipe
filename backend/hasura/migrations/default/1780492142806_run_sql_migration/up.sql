@@ -1,0 +1,2 @@
+ALTER TABLE recipes 
+ADD COLUMN is_premium BOOLEAN GENERATED ALWAYS AS (price > 0) STORED;

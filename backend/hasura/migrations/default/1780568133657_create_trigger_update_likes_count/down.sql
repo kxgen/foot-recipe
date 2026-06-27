@@ -1,0 +1,6 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE TRIGGER trigger_update_recipe_likes
+-- AFTER INSERT OR DELETE ON recipe_likes
+-- FOR EACH ROW
+-- EXECUTE FUNCTION update_recipe_like_stats();

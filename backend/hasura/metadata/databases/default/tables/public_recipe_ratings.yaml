@@ -1,0 +1,60 @@
+table:
+  name: recipe_ratings
+  schema: public
+object_relationships:
+  - name: recipe
+    using:
+      foreign_key_constraint_on: recipe_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set:
+        user_id: X-hasura-user-id
+      columns:
+        - recipe_id
+        - score
+    comment: ""
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - user_id
+        - recipe_id
+        - score
+        - created_at
+        - updated_at
+      filter: {}
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - user_id
+        - recipe_id
+        - score
+        - created_at
+        - updated_at
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - score
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    comment: ""

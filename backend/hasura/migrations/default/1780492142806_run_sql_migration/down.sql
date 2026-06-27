@@ -1,0 +1,4 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- ALTER TABLE recipes
+-- ADD COLUMN is_premium BOOLEAN GENERATED ALWAYS AS (price > 0) STORED;

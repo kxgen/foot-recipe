@@ -1,0 +1,14 @@
+services:
+  hasura:
+    image: hasura/graphql-engine:v2.48.16
+    ports:
+      - "8080:8080"
+    environment:
+      # HASURA_GRAPHQL_CORS_DOMAIN: "*"
+      HASURA_GRAPHQL_DATABASE_URL: postgresql://postgres:free@host.docker.internal:5432/food_recipe
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256","key":"ThisIsMySuperLongAndSecureHS256SecretKey"}'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: "admin123"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+    restart: no

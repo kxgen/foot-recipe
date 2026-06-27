@@ -1,0 +1,55 @@
+type Mutation {
+  initiatePurchase(
+    recipeId: Int!
+    userId: Int!
+  ): InitiatePurchaseOutput
+  loginUser(
+    username: String!
+    password: String!
+  ): LoginResponse
+  registerUser(
+    username: String!
+    email: String!
+    password: String!
+  ): LoginResponse
+  uploadAvatar(
+    userId: bigint!
+    slug: String!
+    imageName: String!
+    base64Image: String!
+  ): AvatarUploadOutput
+  uploadRecipeImage(
+    imageName: String!
+    base64Image: String!
+    recipeId: Int
+    tempFolder: String
+    filename: String
+  ): RecipeImageUploadOutput
+  updatePassword(
+    newPassword: String!
+  ): UpdatePasswordOutput
+}
+
+type UpdatePasswordOutput {
+  success: Boolean!
+  message: String
+}
+
+type LoginResponse {
+  id: Int!
+  token: String!
+}
+
+type AvatarUploadOutput {
+  success: Boolean!
+  avatarUrl: String!
+}
+
+type RecipeImageUploadOutput {
+  success: Boolean!
+  imageUrl: String!
+}
+
+type InitiatePurchaseOutput {
+  checkoutUrl: String!
+}
